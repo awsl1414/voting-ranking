@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-11 21:45:40
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-11 23:02:11
+ * @LastEditTime: 2024-08-12 16:40:45
  * @FilePath: /hnuahe-presentation-voting-ranking/controllers/common.go
  * @Description:
  *
@@ -11,6 +11,8 @@
 package controllers
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -35,4 +37,11 @@ func ReturnSuccess(c *gin.Context, code int, msg interface{}, data interface{}) 
 func ReturnError(c *gin.Context, code int, msg interface{}) {
 	json := &JsonErrStruct{Code: code, Msg: msg}
 	c.JSON(http.StatusOK, json)
+}
+
+// md5加密
+func EncryMd5(s string) string {
+	ctx := md5.New()
+	ctx.Write([]byte(s))
+	return hex.EncodeToString(ctx.Sum(nil))
 }
