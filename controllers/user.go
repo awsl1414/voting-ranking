@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-11 22:58:52
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-12 23:01:24
+ * @LastEditTime: 2024-08-12 23:31:23
  * @FilePath: /hnuahe-presentation-voting-ranking/controllers/user.go
  * @Description:
  *
@@ -42,5 +42,34 @@ func (u UserController) Register(c *gin.Context) {
 		ReturnError(c, 4001, "注册失败，请联系管理员")
 		return
 	}
-	ReturnSuccess(c, 0, "注册成功", user)
+	ReturnSuccess(c, 0, "注册成功", "")
+}
+
+type UserAPi struct {
+	Id       int    `json:"id"`
+	Username string `json:"username"`
+}
+
+func (u UserController) Login(c *gin.Context) {
+
+	username := c.DefaultPostForm("username", "")
+	password := c.DefaultPostForm("password", "")
+
+	if username == "" || password == "" {
+		ReturnError(c, 4001, "请输入正确信息")
+		return
+	}
+
+	user, _ := models.GetUserInfoByUserName(username)
+
+	if user.Id == 0 || user.Password != EncryMd5(password) {
+		ReturnError(c, 4004, "用户名或密码不正确")
+		return
+	}
+
+	// TODO: session登陆
+	data := UserAPi{Id: user.Id, Username: user.Username}
+
+	ReturnSuccess(c, 0, "登陆成功", data)
+
 }
