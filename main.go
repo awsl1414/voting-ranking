@@ -2,16 +2,25 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-11 21:59:40
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-11 22:21:06
+ * @LastEditTime: 2024-08-12 22:59:16
  * @FilePath: /hnuahe-presentation-voting-ranking/main.go
  * @Description:
  *
  */
 package main
 
-import "voting-ranking/router"
+import (
+	"voting-ranking/dao"
+	"voting-ranking/models"
+	"voting-ranking/router"
+)
 
 func main() {
+	// 数据库迁移
+	if err := dao.Db.AutoMigrate(&models.User{}); err != nil {
+		panic("数据库迁移失败")
+	}
+
 	router := router.Router()
 
 	router.Run("127.0.0.1:8888")
