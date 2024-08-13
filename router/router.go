@@ -2,8 +2,8 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-11 22:01:28
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-12 23:13:30
- * @FilePath: /hnuahe-presentation-voting-ranking/router/router.go
+ * @LastEditTime: 2024-08-13 16:53:17
+ * @FilePath: /voting-ranking/router/router.go
  * @Description:
  *
  */
@@ -22,13 +22,15 @@ func Router() *gin.Engine {
 	r.Use(logger.Recover)
 
 	test := r.Group("/test")
-
 	test.GET("", controllers.Test{}.Hello)
 	test.GET("/log", controllers.Test{}.LogTest)
 
 	user := r.Group("/user")
 	user.POST("/register", controllers.UserController{}.Register)
 	user.POST("/login", controllers.UserController{}.Login)
+
+	player := r.Group("/player")
+	player.POST("/list", controllers.PlayerController{}.GetPlayers)
 
 	return r
 
