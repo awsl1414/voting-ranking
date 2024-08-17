@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-13 12:09:03
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-13 21:57:31
+ * @LastEditTime: 2024-08-17 17:52:35
  * @FilePath: /voting-ranking/models/player.go
  * @Description:
  *
@@ -35,9 +35,9 @@ func GetPlayerInfo(id int) (Player, error) {
 	return player, err
 }
 
-func GetPlayers(aid int) ([]Player, error) {
+func GetPlayers(aid int, sort string) ([]Player, error) {
 	var players []Player
-	err := dao.Db.Where("aid = ?", aid).Find(&players).Error
+	err := dao.Db.Where("aid = ?", aid).Order(sort).Find(&players).Error
 	return players, err
 }
 
