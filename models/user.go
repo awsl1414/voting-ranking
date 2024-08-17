@@ -2,8 +2,8 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-11 23:04:34
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-12 22:57:23
- * @FilePath: /hnuahe-presentation-voting-ranking/models/user.go
+ * @LastEditTime: 2024-08-13 17:26:09
+ * @FilePath: /voting-ranking/models/user.go
  * @Description:
  *
  */
@@ -24,6 +24,12 @@ type User struct {
 
 func (User) TableName() string {
 	return "user"
+}
+
+func GetUserInfo(id int) (User, error) {
+	var user User
+	err := dao.Db.Where("id = ?", id).First(&user).Error
+	return user, err
 }
 
 func GetUserInfoByUserName(username string) (User, error) {

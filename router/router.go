@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-11 22:01:28
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-13 16:53:17
+ * @LastEditTime: 2024-08-17 16:19:51
  * @FilePath: /voting-ranking/router/router.go
  * @Description:
  *
@@ -31,6 +31,9 @@ func Router() *gin.Engine {
 
 	player := r.Group("/player")
 	player.POST("/list", controllers.PlayerController{}.GetPlayers)
+
+	vote := r.Group("/vote")
+	vote.POST("/add", controllers.VoteController{}.AddVote)
 
 	return r
 

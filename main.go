@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-11 21:59:40
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-13 12:17:48
+ * @LastEditTime: 2024-08-17 17:34:41
  * @FilePath: /voting-ranking/main.go
  * @Description:
  *
@@ -18,7 +18,7 @@ import (
 func main() {
 
 	// 数据库迁移
-	if err := dao.Db.AutoMigrate(&models.User{}, &models.Player{}); err != nil {
+	if err := dao.Db.AutoMigrate(&models.User{}, &models.Player{}, &models.Vote{}); err != nil {
 		panic("数据库迁移失败")
 	}
 
