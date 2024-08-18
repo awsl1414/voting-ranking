@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-13 12:09:03
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-17 17:52:35
+ * @LastEditTime: 2024-08-17 23:30:54
  * @FilePath: /voting-ranking/models/player.go
  * @Description:
  *
@@ -22,7 +22,7 @@ type Player struct {
 	Nickname    string `json:"nickname"`
 	Declaration string `json:"declaration"`
 	Avatar      string `json:"avatar"`
-	Score       string `json:"score"`
+	Score       int    `json:"score"`
 }
 
 func (Player) TableName() string {
