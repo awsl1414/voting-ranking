@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-18 16:59:07
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-18 22:14:11
+ * @LastEditTime: 2024-08-19 22:44:47
  * @FilePath: /voting-ranking/main.go
  * @Description:
  *
@@ -16,6 +16,7 @@ import (
 	"os/signal"
 	"time"
 	"voting-ranking/common/config"
+	"voting-ranking/pkg/db"
 	"voting-ranking/pkg/log"
 	"voting-ranking/router"
 
@@ -63,4 +64,10 @@ func main() {
 	// 记录服务器退出日志
 	log.Info("Server exiting")
 
+}
+
+// 初始化连接
+func init() {
+	// mysql
+	db.SetupDBLink()
 }
