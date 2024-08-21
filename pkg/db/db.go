@@ -87,7 +87,8 @@ func SetupDBLink() error {
 
 	// 检查并创建表
 	tables := map[string]interface{}{
-		"user": &model.User{},
+		"user":     &model.User{},
+		"activity": &model.Activity{},
 	}
 	for tableName, tableModel := range tables {
 		var tableExists bool

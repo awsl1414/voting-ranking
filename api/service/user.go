@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-19 23:15:56
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-21 22:14:04
+ * @LastEditTime: 2024-08-21 23:14:37
  * @FilePath: /voting-ranking/api/service/user.go
  * @Description: 用户服务层
  *
@@ -11,7 +11,6 @@
 package service
 
 import (
-	"fmt"
 	"voting-ranking/api/dao"
 	"voting-ranking/api/dto"
 	"voting-ranking/common/result"
@@ -31,7 +30,7 @@ type UserServiceImpl struct{}
 
 // 注册
 func (u UserServiceImpl) Register(c *gin.Context, dto dto.UserRegisterDto) {
-	fmt.Println(dto)
+
 	err := validator.New().Struct(dto)
 	if err != nil {
 		result.Failed(c, int(result.ApiCode.REQUIRED), result.ApiCode.GetMessage(result.ApiCode.REQUIRED))
