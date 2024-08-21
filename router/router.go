@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-18 18:26:30
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-18 18:28:41
+ * @LastEditTime: 2024-08-21 21:28:40
  * @FilePath: /voting-ranking/router/router.go
  * @Description:
  *
@@ -10,6 +10,7 @@
 package router
 
 import (
+	"voting-ranking/api/controller"
 	"voting-ranking/middleware"
 
 	"github.com/gin-gonic/gin"
@@ -24,6 +25,16 @@ func InitRouter() *gin.Engine {
 	// 日志中间件
 	router.Use(middleware.Logger())
 
+	register(router)
+
 	return router
 
+}
+
+func register(router *gin.Engine) {
+
+	user := router.Group("/api/user")
+	{
+		user.POST("/register", controller.Register)
+	}
 }

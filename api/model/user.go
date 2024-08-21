@@ -26,16 +26,3 @@ type User struct {
 func (User) TableName() string {
 	return "user"
 }
-
-// UserRegisterDto 注册参数
-type UserRegisterDto struct {
-	Username        string `json:"username" validate:"required"`        // 用户名
-	Password        string `json:"password" validate:"required"`        // 密码
-	ConfirmPassword string `json:"confirmPassword" validate:"required"` // 密码
-}
-
-// UserLoginDto 登录参数
-type UserLoginDto struct {
-	Username string `json:"username" validate:"required"` // 用户名
-	Password string `json:"password" validate:"required"` // 密码
-}
