@@ -24,7 +24,7 @@ var Db *gorm.DB
 
 // 数据库初始化
 func SetupDBLink() error {
-
+	var err error
 	var dbConfig = config.Config.Db
 
 	// 初始化不带数据库名的 DSN
@@ -36,7 +36,7 @@ func SetupDBLink() error {
 		dbConfig.Charset,
 	)
 
-	Db, err := gorm.Open(mysql.Open(dsnNoDB), &gorm.Config{
+	Db, err = gorm.Open(mysql.Open(dsnNoDB), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent), // 设置 Gorm 的日志记录级别为“Silent”。
 	})
 	if err != nil {
