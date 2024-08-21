@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-18 18:26:30
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-21 21:28:40
+ * @LastEditTime: 2024-08-21 22:15:03
  * @FilePath: /voting-ranking/router/router.go
  * @Description:
  *
@@ -36,5 +36,6 @@ func register(router *gin.Engine) {
 	user := router.Group("/api/user")
 	{
 		user.POST("/register", controller.Register)
+		user.POST("/login", controller.Login)
 	}
 }
