@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-24 17:23:19
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-24 17:24:25
+ * @LastEditTime: 2024-08-24 17:31:57
  * @FilePath: /voting-ranking/api/model/player.go
  * @Description:
  *
@@ -26,6 +26,7 @@ type Player struct {
 	UpdateTime  util.HTime `gorm:"column:update_time;comment:'创建时间';NOT NULL" json:"updateTime"` // 更新时间
 }
 
+// 表名
 func (Player) TableName() string {
 	return "player"
 }
