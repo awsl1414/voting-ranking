@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-19 23:15:56
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-25 23:06:34
+ * @LastEditTime: 2024-08-25 23:31:52
  * @FilePath: /voting-ranking/api/service/user.go
  * @Description: 用户服务层
  *
@@ -32,6 +32,7 @@ type UserServiceImpl struct{}
 func (u UserServiceImpl) Register(c *gin.Context, dto dto.UserRegisterDto) {
 
 	err := validator.New().Struct(dto)
+
 	if err != nil {
 		result.Failed(c, int(result.ApiCode.REQUIRED), result.ApiCode.GetMessage(result.ApiCode.REQUIRED))
 		return
