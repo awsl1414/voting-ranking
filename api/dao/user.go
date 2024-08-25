@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-20 23:05:48
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-21 16:44:14
+ * @LastEditTime: 2024-08-25 23:00:38
  * @FilePath: /voting-ranking/api/dao/user.go
  * @Description:
  *
@@ -30,9 +30,9 @@ func Register(dto dto.UserRegisterDto) (uint, error) {
 }
 
 // 根据用户名查询用户
-func GetUserByUserName(username string) (user model.User) {
-	db.Db.Where("username = ?", username).First(&user)
-	return user
+func GetUserByUserName(username string) (user model.User, err error) {
+	err = db.Db.Where("username = ?", username).First(&user).Error
+	return user, err
 }
 
 // 根据id查询用户

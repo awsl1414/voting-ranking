@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-19 23:15:56
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-21 23:14:37
+ * @LastEditTime: 2024-08-25 23:06:34
  * @FilePath: /voting-ranking/api/service/user.go
  * @Description: 用户服务层
  *
@@ -41,8 +41,8 @@ func (u UserServiceImpl) Register(c *gin.Context, dto dto.UserRegisterDto) {
 		return
 	}
 	// 判断用户是否存在
-	userByName := dao.GetUserByUserName(dto.Username)
-	if userByName.ID > 0 {
+	user, _ := dao.GetUserByUserName(dto.Username)
+	if user.ID > 0 {
 		result.Failed(c, int(result.ApiCode.FAILED), "用户已存在")
 		return
 	}
@@ -61,7 +61,7 @@ func (u UserServiceImpl) Login(c *gin.Context, dto dto.UserLoginDto) {
 		result.Failed(c, int(result.ApiCode.REQUIRED), result.ApiCode.GetMessage(result.ApiCode.REQUIRED))
 		return
 	}
-	user := dao.GetUserByUserName(dto.Username)
+	user, _ := dao.GetUserByUserName(dto.Username)
 
 	if user.ID == 0 {
 		result.Failed(c, int(result.ApiCode.FAILED), "用户或密码不正确")
