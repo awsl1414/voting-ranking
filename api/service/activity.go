@@ -2,8 +2,8 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-21 23:14:56
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-21 23:33:04
- * @FilePath: /voting-ranking/api/service/active.go
+ * @LastEditTime: 2024-08-29 10:25:31
+ * @FilePath: /voting-ranking/api/service/activity.go
  * @Description:
  *
  */
@@ -24,7 +24,7 @@ type IActivityService interface {
 
 type ActivityServiceImpl struct{}
 
-func (a ActivityServiceImpl) AddActivity(c *gin.Context, dto dto.ActivityDto) {
+func (a *ActivityServiceImpl) AddActivity(c *gin.Context, dto dto.ActivityDto) {
 	err := validator.New().Struct(dto)
 	if err != nil {
 		result.Failed(c, int(result.ApiCode.REQUIRED), result.ApiCode.GetMessage(result.ApiCode.REQUIRED))
@@ -49,5 +49,5 @@ func (a ActivityServiceImpl) AddActivity(c *gin.Context, dto dto.ActivityDto) {
 var activityService = ActivityServiceImpl{}
 
 func ActivityService() IActivityService {
-	return activityService
+	return &activityService
 }

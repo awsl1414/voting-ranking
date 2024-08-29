@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-24 17:35:51
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-29 10:10:46
+ * @LastEditTime: 2024-08-29 10:26:04
  * @FilePath: /voting-ranking/api/service/player.go
  * @Description:
  *
@@ -63,7 +63,7 @@ func (p *PlayerServiceImpl) AddPlayer(c *gin.Context, dto dto.AddPlayerDto) {
 }
 
 // 获取选手详情
-func (p PlayerServiceImpl) GetPlayer(c *gin.Context, id int) {
+func (p *PlayerServiceImpl) GetPlayer(c *gin.Context, id int) {
 	player, err := dao.GetPlayerDetail(id)
 	if err != nil {
 		result.Failed(c, int(result.ApiCode.FAILED), "选手不存在")

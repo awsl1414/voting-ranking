@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-19 23:15:56
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-25 23:31:52
+ * @LastEditTime: 2024-08-29 10:26:22
  * @FilePath: /voting-ranking/api/service/user.go
  * @Description: 用户服务层
  *
@@ -29,7 +29,7 @@ type IUserService interface {
 type UserServiceImpl struct{}
 
 // 注册
-func (u UserServiceImpl) Register(c *gin.Context, dto dto.UserRegisterDto) {
+func (u *UserServiceImpl) Register(c *gin.Context, dto dto.UserRegisterDto) {
 
 	err := validator.New().Struct(dto)
 
@@ -56,7 +56,7 @@ func (u UserServiceImpl) Register(c *gin.Context, dto dto.UserRegisterDto) {
 }
 
 // 登陆
-func (u UserServiceImpl) Login(c *gin.Context, dto dto.UserLoginDto) {
+func (u *UserServiceImpl) Login(c *gin.Context, dto dto.UserLoginDto) {
 	err := validator.New().Struct(dto)
 	if err != nil {
 		result.Failed(c, int(result.ApiCode.REQUIRED), result.ApiCode.GetMessage(result.ApiCode.REQUIRED))

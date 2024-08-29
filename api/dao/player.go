@@ -53,3 +53,9 @@ func GetPlayerDetail(id int) (player model.Player, err error) {
 	err = db.Db.Where("id = ?", id).First(&player).Error
 	return player, err
 }
+
+// 更新选手得分
+func UpdatePlayerScore(id int) (player model.Player, err error) {
+	err = db.Db.Model(&player).Where("id = ?").UpdateColumn("update_time", util.HTime{Time: time.Now()}).UpdateColumn("score + ?", 1).Error
+	return player, err
+}
