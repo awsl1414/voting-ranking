@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-24 17:52:30
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-25 22:59:55
+ * @LastEditTime: 2024-08-29 10:16:20
  * @FilePath: /voting-ranking/api/dao/player.go
  * @Description:
  *
@@ -45,5 +45,11 @@ func AddPlayer(dto dto.AddPlayerDto) (id uint, err error) {
 // 根据电话查询选手
 func GetPlayerByPhone(phone string) (player model.Player, err error) {
 	err = db.Db.Where("phone = ?", phone).First(&player).Error
+	return player, err
+}
+
+// 获取选手详情
+func GetPlayerDetail(id int) (player model.Player, err error) {
+	err = db.Db.Where("id = ?", id).First(&player).Error
 	return player, err
 }
