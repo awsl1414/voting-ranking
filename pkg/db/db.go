@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-19 16:54:03
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-24 17:26:54
+ * @LastEditTime: 2024-09-07 16:20:03
  * @FilePath: /voting-ranking/pkg/db/db.go
  * @Description:
  *
@@ -90,6 +90,7 @@ func SetupDBLink() error {
 		"user":     &model.User{},
 		"activity": &model.Activity{},
 		"player":   &model.Player{},
+		"vote":     &model.Vote{},
 	}
 	for tableName, tableModel := range tables {
 		var tableExists bool
