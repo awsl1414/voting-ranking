@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-24 17:35:51
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-29 10:26:04
+ * @LastEditTime: 2024-09-07 17:31:38
  * @FilePath: /voting-ranking/api/service/player.go
  * @Description:
  *
@@ -22,6 +22,7 @@ type IPlayerService interface {
 	GetPlayerList(c *gin.Context, dto dto.PlayerListDto)
 	AddPlayer(c *gin.Context, dto dto.AddPlayerDto)
 	GetPlayer(c *gin.Context, id int)
+	GetRankList(c *gin.Context, dto dto.PlayerListDto)
 }
 
 type PlayerServiceImpl struct{}
@@ -70,6 +71,23 @@ func (p *PlayerServiceImpl) GetPlayer(c *gin.Context, id int) {
 		return
 	}
 	result.Success(c, player)
+}
+
+func (p *PlayerServiceImpl) GetRankList(c *gin.Context, dto dto.PlayerListDto) {
+	err := validator.New().Struct(dto)
+	if err != nil {
+		result.Failed(c, int(result.ApiCode.REQUIRED), result.ApiCode.GetMessage(result.ApiCode.REQUIRED))
+		return
+	}
+
+	ret, err := dao.GetPlayerList(dto.Aid, "score desc")
+
+	if err != nil {
+		result.Failed(c, int(result.ApiCode.FAILED), "获取选手列表失败")
+		return
+	}
+
+	result.Success(c, ret)
 }
 
 var playerService = PlayerServiceImpl{}

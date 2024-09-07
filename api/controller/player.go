@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-24 18:07:43
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-29 10:10:59
+ * @LastEditTime: 2024-09-07 17:32:23
  * @FilePath: /voting-ranking/api/controller/player.go
  * @Description:
  *
@@ -32,4 +32,10 @@ func AddPlayer(c *gin.Context) {
 func GetPlayer(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Query("id"))
 	service.PlayerService().GetPlayer(c, id)
+}
+
+func GetRankList(c *gin.Context) {
+	var dto dto.PlayerListDto
+	_ = c.BindJSON(&dto)
+	service.PlayerService().GetRankList(c, dto)
 }
