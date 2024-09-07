@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-24 17:52:30
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-29 10:16:20
+ * @LastEditTime: 2024-09-07 16:52:41
  * @FilePath: /voting-ranking/api/dao/player.go
  * @Description:
  *
@@ -15,6 +15,8 @@ import (
 	"voting-ranking/api/model"
 	"voting-ranking/common/util"
 	"voting-ranking/pkg/db"
+
+	"gorm.io/gorm"
 )
 
 func GetPlayerList(aid int, sort string) ([]model.Player, error) {
@@ -56,6 +58,6 @@ func GetPlayerDetail(id int) (player model.Player, err error) {
 
 // 更新选手得分
 func UpdatePlayerScore(id int) (player model.Player, err error) {
-	err = db.Db.Model(&player).Where("id = ?").UpdateColumn("update_time", util.HTime{Time: time.Now()}).UpdateColumn("score + ?", 1).Error
+	err = db.Db.Model(&player).Where("id = ?", id).UpdateColumn("update_time", util.HTime{Time: time.Now()}).UpdateColumn("score", gorm.Expr("score + ?", 1)).Error
 	return player, err
 }
