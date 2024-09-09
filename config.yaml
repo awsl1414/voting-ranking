@@ -19,6 +19,11 @@ db:
   # 最大连接数
   maxOpen: 150
 
+# redis配置
+redis:
+  address: 127.0.0.1:6379
+  password:
+
 
 
 # log日志配置
