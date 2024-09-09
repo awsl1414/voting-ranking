@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-21 22:49:42
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-08-21 22:57:10
+ * @LastEditTime: 2024-09-09 21:33:15
  * @FilePath: /voting-ranking/api/model/active.go
  * @Description:
  *
