@@ -2,12 +2,12 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-09-09 18:34:51
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-09-09 21:12:31
- * @FilePath: /voting-ranking/pkg/db/redis.go
+ * @LastEditTime: 2024-09-09 21:29:27
+ * @FilePath: /voting-ranking/pkg/redis/redis.go
  * @Description:
  *
  */
-package db
+package redis
 
 import (
 	"context"
