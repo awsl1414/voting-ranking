@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-18 16:59:07
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-09-09 22:15:16
+ * @LastEditTime: 2024-09-10 16:18:34
  * @FilePath: /voting-ranking/main.go
  * @Description:
  *
@@ -16,6 +16,7 @@ import (
 	"os/signal"
 	"time"
 	"voting-ranking/common/config"
+	_ "voting-ranking/docs"
 	"voting-ranking/pkg/db"
 	"voting-ranking/pkg/log"
 	"voting-ranking/pkg/redis"
@@ -24,6 +25,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @title 活动投票系统API接口文档
+// @version 1.0
+// @description  活动投票系统API接口文档
+// @in header
+// @name Authorization
 func main() {
 	// 加载日志
 	log := log.Log()

@@ -1,0 +1,265 @@
+definitions:
+  dto.ActivityDto:
+    properties:
+      name:
+        description: 活动名
+        type: string
+    type: object
+  dto.AddPlayerDto:
+    properties:
+      aid:
+        description: 活动id
+        type: integer
+      avatar:
+        description: 头像
+        type: string
+      declaration:
+        description: 宣言
+        type: string
+      nickname:
+        description: 昵称
+        type: string
+      note:
+        description: 备注
+        type: string
+      phone:
+        description: 电话
+        type: string
+      ref:
+        description: 编号
+        type: string
+      score:
+        description: 分数
+        type: integer
+    required:
+    - aid
+    - avatar
+    - declaration
+    - nickname
+    - note
+    - phone
+    - ref
+    - score
+    type: object
+  dto.PlayerListDto:
+    properties:
+      aid:
+        description: 活动id
+        type: integer
+    required:
+    - aid
+    type: object
+  dto.UserLoginDto:
+    properties:
+      password:
+        description: 密码
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  dto.UserRegisterDto:
+    properties:
+      confirmPassword:
+        description: 密码
+        type: string
+      password:
+        description: 密码
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - confirmPassword
+    - password
+    - username
+    type: object
+  dto.VoteDto:
+    properties:
+      playerId:
+        description: 用户名
+        type: integer
+      userId:
+        description: 密码
+        type: integer
+    required:
+    - playerId
+    - userId
+    type: object
+  result.Result:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: 活动投票系统API接口文档
+  title: 活动投票系统API接口文档
+  version: "1.0"
+paths:
+  /api/activity/add:
+    post:
+      description: 创建活动接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ActivityDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 创建活动接口
+      tags:
+      - Activity
+  /api/player/add:
+    post:
+      description: 更新选手信息接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddPlayerDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 更新选手信息接口
+      tags:
+      - Player
+  /api/player/info:
+    post:
+      description: 获取选手详情接口
+      parameters:
+      - description: Id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 获取选手详情接口
+      tags:
+      - Player
+  /api/player/list:
+    post:
+      description: 获取选手列表接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PlayerListDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 获取选手列表接口
+      tags:
+      - Player
+  /api/player/rank:
+    post:
+      description: 获取排行傍列表接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PlayerListDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 获取排行傍列表接口
+      tags:
+      - Player
+  /api/user/login:
+    post:
+      description: 用户登录接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserLoginDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 用户登录接口
+      tags:
+      - User
+  /api/user/register:
+    post:
+      description: 用户注册接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserRegisterDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 用户注册接口
+      tags:
+      - User
+  /api/vote/add:
+    post:
+      description: 投票接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.VoteDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 投票接口
+      tags:
+      - Vote
+swagger: "2.0"

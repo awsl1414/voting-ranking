@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-24 17:35:51
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-09-09 22:06:26
+ * @LastEditTime: 2024-09-10 15:47:46
  * @FilePath: /voting-ranking/api/service/player.go
  * @Description:
  *
@@ -110,6 +110,7 @@ func (p *PlayerServiceImpl) GetRankList(c *gin.Context, dto dto.PlayerListDto) {
 		result.Failed(c, int(result.ApiCode.FAILED), "获取选手列表失败")
 		return
 	}
+	// 将数据库查询到的数据缓存到 Redis 中
 	for _, value := range ret {
 		store.Set(redisKey, int(value.ID), value.Score)
 	}
