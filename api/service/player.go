@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-24 17:35:51
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-09-10 15:47:46
+ * @LastEditTime: 2024-09-10 16:43:57
  * @FilePath: /voting-ranking/api/service/player.go
  * @Description:
  *
@@ -35,6 +35,7 @@ type PlayerServiceImpl struct{}
 
 // 获取选手列表
 func (p *PlayerServiceImpl) GetPlayerList(c *gin.Context, dto dto.PlayerListDto) {
+	// 校验参数
 	err := validator.New().Struct(dto)
 	if err != nil {
 		result.Failed(c, int(result.ApiCode.REQUIRED), result.ApiCode.GetMessage(result.ApiCode.REQUIRED))
@@ -86,8 +87,9 @@ func (p *PlayerServiceImpl) GetRankList(c *gin.Context, dto dto.PlayerListDto) {
 		result.Failed(c, int(result.ApiCode.REQUIRED), result.ApiCode.GetMessage(result.ApiCode.REQUIRED))
 		return
 	}
-
+	// 构建 Redis 缓存的 key，格式为 "rank:aid:<活动ID>"
 	redisKey := fmt.Sprintf("rank:aid:%d", dto.Aid)
+	// 从缓存中获取排行榜数据
 	cacheList := store.Get(redisKey)
 	fmt.Println("cacheList: ", cacheList)
 	if len(cacheList) > 0 {
@@ -95,6 +97,7 @@ func (p *PlayerServiceImpl) GetRankList(c *gin.Context, dto dto.PlayerListDto) {
 		for _, value := range cacheList {
 			id, _ := strconv.Atoi(value)
 			player, _ := dao.GetPlayerDetail(id)
+			// 如果玩家存在（ID 大于 0），则加入到玩家列表中
 			if player.ID > 0 {
 				players = append(players, player)
 			}
