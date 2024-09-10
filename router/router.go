@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-18 18:26:30
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-09-10 16:21:17
+ * @LastEditTime: 2024-09-10 16:34:44
  * @FilePath: /voting-ranking/router/router.go
  * @Description:
  *
@@ -28,6 +28,8 @@ func InitRouter() *gin.Engine {
 	// 使用 Gin 内置的恢复中间件，捕获所有 panic，并返回500错误（跌机恢复）
 	router.Use(gin.Recovery())
 
+	// 跨域中间件
+	router.Use(middleware.Cors())
 	// 日志中间件
 	router.Use(middleware.Logger())
 

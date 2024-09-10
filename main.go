@@ -2,7 +2,7 @@
  * @Author: awsl1414 3030994569@qq.com
  * @Date: 2024-08-18 16:59:07
  * @LastEditors: awsl1414 3030994569@qq.com
- * @LastEditTime: 2024-09-10 16:18:34
+ * @LastEditTime: 2024-09-10 16:34:56
  * @FilePath: /voting-ranking/main.go
  * @Description:
  *
@@ -16,7 +16,7 @@ import (
 	"os/signal"
 	"time"
 	"voting-ranking/common/config"
-	_ "voting-ranking/docs"
+
 	"voting-ranking/pkg/db"
 	"voting-ranking/pkg/log"
 	"voting-ranking/pkg/redis"
