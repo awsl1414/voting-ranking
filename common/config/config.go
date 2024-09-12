@@ -12,6 +12,7 @@ package config
 
 import (
 	"os"
+	"strconv"
 
 	"gopkg.in/yaml.v3"
 )
@@ -76,5 +77,23 @@ func init() {
 	err = yaml.Unmarshal(yamlFile, &Config)
 	if err != nil {
 		panic(err)
+	}
+	// 使用环境变量覆盖配置值
+	if envHost := os.Getenv("DB_HOST"); envHost != "" {
+		Config.Db.Host = envHost
+	}
+	if envPort := os.Getenv("DB_PORT"); envPort != "" {
+		if port, err := strconv.Atoi(envPort); err == nil {
+			Config.Db.Port = port
+		}
+	}
+	if envUser := os.Getenv("DB_USER"); envUser != "" {
+		Config.Db.Username = envUser
+	}
+	if envPass := os.Getenv("DB_PASSWORD"); envPass != "" {
+		Config.Db.Password = envPass
+	}
+	if envRHost := os.Getenv("REDIS_HOST"); envRHost != "" {
+		Config.Redis.Address = envRHost
 	}
 }
