@@ -71,7 +71,7 @@ func SetupDBLink() error {
 		dbConfig.Db,
 		dbConfig.Charset)
 	Db, err = gorm.Open(mysql.Open(dsnWithDB), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info), DisableForeignKeyConstraintWhenMigrating: true,
+		Logger: logger.Default.LogMode(logger.Silent), DisableForeignKeyConstraintWhenMigrating: true,
 	})
 	if err != nil {
 		panic(err)

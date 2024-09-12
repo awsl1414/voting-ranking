@@ -11,10 +11,8 @@ package service
 
 import (
 	"fmt"
-	"strconv"
 	"voting-ranking/api/dao"
 	"voting-ranking/api/dto"
-	"voting-ranking/api/model"
 	"voting-ranking/common/result"
 	"voting-ranking/common/util"
 
@@ -91,24 +89,19 @@ func (p *PlayerServiceImpl) GetRankList(c *gin.Context, dto dto.PlayerListDto) {
 	redisKey := fmt.Sprintf("rank:aid:%d", dto.Aid)
 	// 从缓存中获取排行榜数据
 	cacheList := store.Get(redisKey)
-	fmt.Println("cacheList: ", cacheList)
+	// fmt.Println(cacheList)
 	if len(cacheList) > 0 {
-		var players []model.Player
-		for _, value := range cacheList {
-			id, _ := strconv.Atoi(value)
-			player, _ := dao.GetPlayerDetail(id)
-			// 如果玩家存在（ID 大于 0），则加入到玩家列表中
-			if player.ID > 0 {
-				players = append(players, player)
-			}
+		// 直接从缓存中获取玩家详情
+		players, err := dao.GetPlayerByIds(cacheList)
+		if err != nil {
+			result.Failed(c, int(result.ApiCode.FAILED), "获取选手详情失败")
+			return
 		}
 		result.Success(c, players)
 		return
-
 	}
 
 	ret, err := dao.GetPlayerList(dto.Aid, "score desc")
-
 	if err != nil {
 		result.Failed(c, int(result.ApiCode.FAILED), "获取选手列表失败")
 		return

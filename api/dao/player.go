@@ -61,3 +61,10 @@ func UpdatePlayerScore(id int) (player model.Player, err error) {
 	err = db.Db.Model(&player).Where("id = ?", id).UpdateColumn("update_time", util.HTime{Time: time.Now()}).UpdateColumn("score", gorm.Expr("score + ?", 1)).Error
 	return player, err
 }
+
+// GetPlayerByIds 根据 ID 列表获取玩家详情
+func GetPlayerByIds(ids []string) ([]model.Player, error) {
+	var players []model.Player
+	err := db.Db.Where("id IN (?)", ids).Find(&players).Error
+	return players, err
+}

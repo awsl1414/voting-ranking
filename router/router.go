@@ -38,7 +38,7 @@ func InitRouter() *gin.Engine {
 		http.Dir(config.Config.ImageSettings.UploadDir))
 
 	// 日志中间件
-	router.Use(middleware.Logger())
+	// router.Use(middleware.Logger())
 
 	// 注册路由
 	register(router)
