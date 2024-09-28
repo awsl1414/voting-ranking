@@ -6,7 +6,7 @@ import (
 )
 
 // EncryptonMd5 使用 MD5 对字符串进行加密，返回加密后的十六进制字符串
-func EncryptonMd5(s string) string {
+func EncryptionMd5(s string) string {
 	// 创建一个新的 MD5 哈希对象
 	hash := md5.New()
 	// 将字符串转换为字节数组并写入哈希对象

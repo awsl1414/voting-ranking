@@ -21,7 +21,7 @@ import (
 func Register(dto dto.UserRegisterDto) (uint, error) {
 	user := model.User{
 		Username:   dto.Username,
-		Password:   util.EncryptonMd5(dto.Password),
+		Password:   util.EncryptionMd5(dto.Password),
 		CreateTime: util.HTime{Time: time.Now()},
 		UpdateTime: util.HTime{Time: time.Now()},
 	}

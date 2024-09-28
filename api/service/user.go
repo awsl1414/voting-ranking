@@ -69,7 +69,7 @@ func (u *UserServiceImpl) Login(c *gin.Context, dto dto.UserLoginDto) {
 		return
 	}
 
-	if user.Password != util.EncryptonMd5(dto.Password) {
+	if user.Password != util.EncryptionMd5(dto.Password) {
 		result.Failed(c, int(result.ApiCode.FAILED), "用户或密码不正确")
 		return
 	}
