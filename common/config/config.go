@@ -68,6 +68,8 @@ var Config *config
 
 func init() {
 	yamlFile, err := os.ReadFile("./config.yaml")
+	// -- 测试时打开
+	// yamlFile, err := os.ReadFile("/home/arch/Desktop/voting-ranking/config.yaml")
 	// 有错直接down
 	if err != nil {
 		panic(err)

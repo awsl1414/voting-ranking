@@ -93,21 +93,26 @@ func SetupDBLink() error {
 		"vote":     &model.Vote{},
 	}
 	for tableName, tableModel := range tables {
-		var tableExists bool
-		query := "SELECT EXISTS(SELECT 1 FROM information_schema.tables WHERE table_schema = ? AND table_name = ?)"
-		err = Db.Raw(query, dbConfig.Db, tableName).Scan(&tableExists).Error
-		if err != nil {
-			return fmt.Errorf("failed to check table '%s' existence: %w", tableName, err)
-		}
+
+		// // 判断表是否存在
+		// var tableExists bool
+		// query := "SELECT EXISTS(SELECT 1 FROM information_schema.tables WHERE table_schema = ? AND table_name = ?)"
+		// err = Db.Raw(query, dbConfig.Db, tableName).Scan(&tableExists).Error
+		// if err != nil {
+		// 	return fmt.Errorf("failed to check table '%s' existence: %w", tableName, err)
+		// }
+
+		// 判断表是否存在
+		tableExists := Db.Migrator().HasTable(tableName)
 
 		if !tableExists {
-			fmt.Printf("Table '%s' does not exist, creating...", tableName)
+			fmt.Printf("Table '%s' does not exist, creating...\n", tableName)
 			err := Db.AutoMigrate(tableModel)
 			if err != nil {
 				return fmt.Errorf("failed to create table '%s': %w", tableName, err)
 			}
 		} else {
-			fmt.Printf("Table '%s' already exists, skipping creation.", tableName)
+			fmt.Printf("Table '%s' already exists, skipping creation.\n", tableName)
 		}
 	}
 	return nil

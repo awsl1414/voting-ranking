@@ -1,10 +1,10 @@
 # 项目启动端口
 server:
-  address: :8888
+  address: 0.0.0.0:8888
   # debug模式
-  model: debug
+  # model: debug
   # release模式
-  # model:release
+  model: release
 
 db:
   dialects: mysql
